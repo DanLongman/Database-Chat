@@ -124,8 +124,12 @@ public class ChatFrame extends JFrame {
 		
 		JButton btnTextColor = new JButton("text color");
 		btnTextColor.addActionListener(new ActionListener() {
+			int i = 0;
 			public void actionPerformed(ActionEvent e) {
-				preferredColor = Color.BLUE;
+				Color[] myColors = {Color.BLUE, Color.PINK, Color.GREEN, Color.YELLOW, 
+						Color.RED, Color.ORANGE, Color.CYAN, Color.BLACK};
+				preferredColor = myColors[i];
+				i = (i + 1) % 8;
 			}
 		});
 		btnTextColor.putClientProperty("JComponent.sizeVariant", "mini");
