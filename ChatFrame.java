@@ -48,6 +48,7 @@ public class ChatFrame extends JFrame {
 	private JLabel lblChannelName;
 	private JLabel[] messageLabels;
 	private Color preferredColor;
+	private JPanel usernamePanel;
 	
 	/**
 	 * Launch the application.
@@ -97,9 +98,16 @@ public class ChatFrame extends JFrame {
 			e.printStackTrace();
 		}
 		
-		JPanel usernamePanel = new JPanel();
-		contentPane.add(usernamePanel, BorderLayout.WEST);
+		JScrollPane usersScroller = new JScrollPane(usernamePanel, ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS, 
+				ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		usersScroller.setAutoscrolls(true);
+		contentPane.add(usersScroller);
+		
+		usernamePanel = new JPanel();
+		usernamePanel.setBackground(Color.WHITE);
+		usersScroller.setViewportView(usernamePanel);
 		usernamePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		contentPane.add(usernamePanel, BorderLayout.WEST);
 		
 		usersTextArea = new JTextArea();
 		usersTextArea.setText("Online Users:" + "\n");
@@ -216,7 +224,7 @@ public class ChatFrame extends JFrame {
 	private void messagesUpdate(StringBuilder generalMessages) throws SQLException {
 		generalMessages.delete(0, generalMessages.length());
 		List<String> messages = MessagesTable.executeQueryReturnMessagesFromChannel(currentChannel);
-		usersList.clear(); // clear users before updating
+		usersList.clear(); // clear users before updating (to avoid duplicates being created over and over)
 		mySignInPanel.removeAll();
 		mySignInPanel.setLayout(new GridLayout(messages.size()/2, 1, 0, 0));
 		String currentUser = "";
@@ -230,13 +238,16 @@ public class ChatFrame extends JFrame {
 			mySignInPanel.add(messageLabels[i/2]);
 		}
 		StringBuilder users = new StringBuilder("Online Users:\n");
-		
-		for(String user : usersList) {
-			users.append(user);
-			users.append("\n");
-		}
-		
 		usersTextArea.setText(users + "");
+		// adding each user-name as a JLabel
+		usernamePanel.removeAll();
+		usernamePanel.setLayout(new GridLayout(usersList.size() + 1, 1, 0, 0));
+		usernamePanel.add(usersTextArea);
+		for(int i = 0; i < usersList.size(); i ++) {
+			JLabel username = new JLabel(usersList.get(i));
+			username.setBackground(Color.WHITE);
+			usernamePanel.add(username);
+		}
 	}
 	
 	private ActionListener channelListener(StringBuilder channelMessage) {
