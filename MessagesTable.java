@@ -1,4 +1,11 @@
-package a2chat;
+package database;
+
+/******************************************
+ * CSIS2410: Advanced Programming
+ * Assignment 02: Database Application
+ * Authors: Joshua DeMoss & Daniel Longman
+ * Date: 10/07/2018
+ ******************************************/
 
 import java.awt.Color;
 import java.sql.Connection;
@@ -9,50 +16,64 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides basic functionality (data insertions and queries) for the messages table.
+ * @author Joshua DeMoss & Daniel Longman
+ *
+ */
 public class MessagesTable {
 
-	public static String createTable() {
-		return "CREATE TABLE Messages ("
-				+ "ID  int not null primary key AUTO_INCREMENT,"
-				+ "Message varchar(255),"
-				+ "UserID int,"
-				+ "ChannelID int,"
-				+ "Color varchar(255))";
-	}
-
-	public static String fillTable() {
-		return "INSERT INTO Messages (Message, UserID, ChannelID, Color) VALUES "
-				+ "('Hello', 1, 2, 'red'),"
-				+ "('Hey you', 2, 2, 'black'),"
-				+ "('Call me', 1, 1, 'red')";
-	}
-
+	/**
+	 * Add an entered message to the table.
+	 * @param message
+	 * @param userID
+	 * @param channelID
+	 * @param color
+	 * @return
+	 */
 	public static String addMessageToTable(String message, int userID, int channelID, String color) {
 		return "INSERT INTO Messages (Message, UserID, ChannelID, Color, Time) VALUES "
 				+ "('" + message + "', " + userID + ", " + channelID + ", " + "'" + color + "', now())";
 	}
 
+	/**
+	 * Updates the color of the text.
+	 * @param userID
+	 * @param color
+	 * @return
+	 */
 	public static String updateColor(String userID, String color) {
 		return "UPDATE Customers "
 				+ "SET Color = '" + color + "' "
 				+ "WHERE UserID = " + userID;
 	}
 
-	public static String dropTable() {
-		return "DROP Table Messages";
-	}
-
 	// - - - - - - - - - - - - - Query Statements - - - - - - - - - - - - - 
+	/**
+	 * Returns the String used to query all messages from the table.
+	 * @return
+	 */
 	public static String query_All() {
 		return "SELECT * FROM Messages ";
 	}
 
+	/**
+	 * Returns the String used to query all messages from a specified channel from the table.
+	 * @param channelID
+	 * @return
+	 */
 	public static String query_MessagesFromChannel(int channelID) {
 		return "SELECT UserName, Message, Color, TIME_FORMAT(Time, '%H:%i') FROM Messages "
 				+ "JOIN Accounts on Accounts.UserID = Messages.UserID "
 				+ "WHERE ChannelID=" + channelID;
 	}
 
+	/**
+	 * Returns all of the messages in the specified chat channel
+	 * in a List of type <Message>.
+	 * @param channelID
+	 * @return
+	 */
 	public static List<Message> getMessagesFromChannel(int channelID) {
 		List<Message> messages = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(

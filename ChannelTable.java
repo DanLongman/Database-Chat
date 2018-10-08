@@ -1,4 +1,11 @@
-package a2chat;
+package database;
+
+/******************************************
+ * CSIS2410: Advanced Programming
+ * Assignment 02: Database Application
+ * Authors: Joshua DeMoss & Daniel Longman
+ * Date: 10/07/2018
+ ******************************************/
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,35 +13,34 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Provides basic functionality (data insertions and queries) for the channel table.
+ * @author Joshua DeMoss & Daniel Longman
+ *
+ */
 public class ChannelTable {
-
-	public static String createTable() {
-		return "CREATE TABLE Channels ("
-				+ "ChannelID  int not null primary key AUTO_INCREMENT,"
-				+ "Name varchar(255))";
-	}
-
-	public static String fillTable() {
-		return "INSERT INTO Channels (Name) VALUES "
-				+ "('General'),"
-				+ "('Gaming'),"
-				+ "('Inspirational')";
-	}
-
-	public static String dropTable() {
-		return "DROP Table Channels";
-	}
-
 	// - - - - - - - - - - - - - Query Statements - - - - - - - - - - - - - 
+	/**
+	 * Returns a String used to query all channels from the table.
+	 * @return
+	 */
 	public static String query_All() {
 		return "SELECT * FROM Channels ";
 	}
 
+	/**
+	 * Returns the String used to query the name of the channel according to the specified ID.
+	 * @return
+	 */
 	public static String query_Name(int channelID) {
 		return "SELECT Name FROM Channels "
 				+ "WHERE channelID=" + channelID;
 	}
 
+	/**
+	 * Returns the String used to query the number of channels.
+	 * @return
+	 */
 	public static String query_numOfChannels() {
 		return "SELECT COUNT(ChannelID) "
 				+ "FROM Channels";

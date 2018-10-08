@@ -1,4 +1,11 @@
-package a2chat;
+package database;
+
+/******************************************
+ * CSIS2410: Advanced Programming
+ * Assignment 02: Database Application
+ * Authors: Joshua DeMoss & Daniel Longman
+ * Date: 10/07/2018
+ ******************************************/
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,6 +35,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JScrollBar;
 
+/**
+ * This JFrame contains all of the chat application appearance and interaction.
+ * @author Joshua DeMoss & Daniel Longman
+ *
+ */
 public class ChatFrame extends JFrame {
 
 	private JPanel contentPane;
@@ -84,7 +96,6 @@ public class ChatFrame extends JFrame {
 		lblChannels.setHorizontalAlignment(SwingConstants.CENTER);
 		channelsPanel.add(lblChannels);
 
-		//channelButtons.clear();  // might be needed if we call the constructor more than onc eand need to empty array list of buttons before a different set of initializations.
 		for (int i = 1; i <= ChannelTable.numOfChannels(); i++) {
 			JButton channelsButton = new JButton(ChannelTable.getChannelName(i));
 			channelButtons.add(channelsButton);
@@ -122,20 +133,7 @@ public class ChatFrame extends JFrame {
 		messageColorPanel.add(txtMessage);
 
 		JButton btnTextColor = new JButton("Text Color");
-		btnTextColor.setPreferredSize(new Dimension(130, 20));
-		btnTextColor.addActionListener(new ActionListener() {
-			int i = 0;
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Color[] myColors = {Color.BLUE, Color.PINK, Color.GREEN, Color.MAGENTA,
-					Color.RED, Color.ORANGE, Color.CYAN, Color.BLACK};
-				String[] colorNames = {"blue", "pink", "green", "magenta", "red", "orange", "cyan", "black"};
-				preferredColorName = colorNames[i];
-				btnTextColor.setForeground(myColors[i]);
-				i = (i + 1) % 8;
-			}
-		});
-		btnTextColor.putClientProperty("JComponent.sizeVariant", "mini");
+		createBtnTextColor(btnTextColor);
 		messageColorPanel.add(btnTextColor);
 
 		messagesScroller = new JScrollPane(mySignInPanel,
@@ -154,6 +152,23 @@ public class ChatFrame extends JFrame {
 		channelTimer = new Timer(200, channelListener());
 		channelTimer.start();
 
+	}
+
+	private void createBtnTextColor(JButton btnTextColor) {
+		btnTextColor.setPreferredSize(new Dimension(130, 20));
+		btnTextColor.addActionListener(new ActionListener() {
+			int i = 0;
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Color[] myColors = {Color.BLUE, Color.PINK, Color.GREEN, Color.MAGENTA,
+					Color.RED, Color.ORANGE, Color.CYAN, Color.BLACK};
+				String[] colorNames = {"blue", "pink", "green", "magenta", "red", "orange", "cyan", "black"};
+				preferredColorName = colorNames[i];
+				btnTextColor.setForeground(myColors[i]);
+				i = (i + 1) % 8;
+			}
+		});
+		btnTextColor.putClientProperty("JComponent.sizeVariant", "mini");
 	}
 
 	private void createTxtMessageField() {
@@ -186,22 +201,42 @@ public class ChatFrame extends JFrame {
 		});
 	}
 
+	/**
+	 * Returns this instance of the chat frame.
+	 * @return
+	 */
 	public ChatFrame getChatFrame() {
 		return this;
 	}
 
+	/**
+	 * Returns the sign in panel.
+	 * @return
+	 */
 	public SignInPanel getSignInPanel() {
 		return this.mySignInPanel;
 	}
 
+	/**
+	 * Returns the welcome message as a JTextArea.
+	 * @return
+	 */
 	public JTextArea getLblWelcome() {
 		return this.lblWelcome;
 	}
 
+	/**
+	 * Sets the user ID to the specified value.
+	 * @param ID
+	 */
 	public void setUserID(int ID) {
 		this.userID = ID;
 	}
 
+	/**
+	 * Returns the channelName JLabel.
+	 * @return
+	 */
 	public JLabel getLblChannelName() {
 		return lblChannelName;
 	}

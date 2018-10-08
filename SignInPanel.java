@@ -1,4 +1,11 @@
-package a2chat;
+package database;
+
+/******************************************
+ * CSIS2410: Advanced Programming
+ * Assignment 02: Database Application
+ * Authors: Joshua DeMoss & Daniel Longman
+ * Date: 10/07/2018
+ ******************************************/
 
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -16,6 +23,12 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Provides the JPanel to allow the user to sign in/up to the chat.
+ * @authors Joshua DeMoss & Daniel Longman
+ *
+ */
+@SuppressWarnings("serial")
 public class SignInPanel extends JPanel {
 
 	private JTextField textFieldUsername;
@@ -24,7 +37,7 @@ public class SignInPanel extends JPanel {
 	private int userID;
 
 	/**
-	 * Create the panel.
+	 * Creates the panel.
 	 */
 	public SignInPanel(ChatFrame myChatFrame) {
 		setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,8 +84,12 @@ public class SignInPanel extends JPanel {
 		signInHolder.setAlignmentX(CENTER_ALIGNMENT);
 
 		JButton btnSignIn = new JButton("Sign In/Up");
-		//btnSignIn.setOpaque(true);
-		//btnSignIn.setBackground(Color.WHITE);
+		creatBtnSignIn(myChatFrame, btnSignIn);
+		signInHolder.add(btnSignIn);
+		add(signInHolder);
+	}
+
+	private void creatBtnSignIn(ChatFrame myChatFrame, JButton btnSignIn) {
 		btnSignIn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				userID = 0;
@@ -110,10 +127,12 @@ public class SignInPanel extends JPanel {
 		});
 		btnSignIn.setMaximumSize(new Dimension(200,70));
 		btnSignIn.setAlignmentX(CENTER_ALIGNMENT);
-		signInHolder.add(btnSignIn);
-		add(signInHolder);
 	}
 
+	/**
+	 * Returns the user id as an int.
+	 * @return
+	 */
 	public int getUserID() {
 		return userID;
 	}

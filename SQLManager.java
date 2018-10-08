@@ -1,4 +1,11 @@
-package a2chat;
+package database;
+
+/******************************************
+ * CSIS2410: Advanced Programming
+ * Assignment 02: Database Application
+ * Authors: Joshua DeMoss & Daniel Longman
+ * Date: 10/07/2018
+ ******************************************/
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,6 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Provides methods with basic sql database functionality.
+ * @author Joshua DeMoss & Daniel Longman
+ *
+ */
 public class SQLManager {
 
 	static {
@@ -17,7 +29,8 @@ public class SQLManager {
 	}
 
 	/**
-	 * Executes the sql statements in the order passed by the user. All sql statements that are passed as arguments change the database, but don't return any data.
+	 * Executes the sql statements in the order passed by the user. All sql statements that are passed as arguments change the database,
+	 * but don't return any data.
 	 *
 	 * @param sqlStatements
 	 * @throws SQLException
