@@ -42,7 +42,6 @@ public class ChatFrame extends JFrame {
 	JTextArea lblWelcome;
 	private SignInPanel mySignInPanel;
 	private JLabel lblChannelName;
-	private JLabel[] messageLabels;
 	private String preferredColorName = "black";
 	private JPanel usernamePanel;
 	private boolean autoScroll = true;
@@ -126,7 +125,6 @@ public class ChatFrame extends JFrame {
 		btnTextColor.setPreferredSize(new Dimension(130, 20));
 		btnTextColor.addActionListener(new ActionListener() {
 			int i = 0;
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color[] myColors = {Color.BLUE, Color.PINK, Color.GREEN, Color.MAGENTA,
@@ -217,18 +215,17 @@ public class ChatFrame extends JFrame {
 		List<Message> messages = MessagesTable.getMessagesFromChannel(currentChannel);
 		mySignInPanel.removeAll();
 		String currentUser;
-		messageLabels = new JLabel[messages.size()]; // create a label for each message from channel
 		for (int i = 0; i < messages.size(); i++) { // appends the correct username based on their ID, followed by their message.
 			currentUser = messages.get(i).user;
-			messageLabels[i] = new JLabel(currentUser + ": " + messages.get(i).messageText);
-			messageLabels[i].setBackground(Color.WHITE);
-			messageLabels[i].setForeground(messages.get(i).color);
-			mySignInPanel.add(messageLabels[i]);
+			JLabel newMessage = new JLabel(messages.get(i).time + " " + currentUser + ": " + messages.get(i).messageText);
+			newMessage.setBackground(Color.WHITE);
+			newMessage.setForeground(messages.get(i).color);
+			mySignInPanel.add(newMessage);
 		}
 		// adding each user-name as a JLabel
 		List<String> onlineUsers = AccountsTable.getOnlineUsers();
 		usernamePanel.removeAll();
-		usernamePanel.setLayout(new GridLayout(onlineUsers.size() + 1, 1, 0, 0));
+		usernamePanel.setLayout(new GridLayout(Math.max(10, onlineUsers.size() + 1), 1, 0, 0));
 		usernamePanel.add(new JLabel("Online Users:"));
 		for (int i = 0; i < onlineUsers.size(); i++) {
 			JLabel username = new JLabel(onlineUsers.get(i));

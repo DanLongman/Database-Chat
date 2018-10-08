@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class MessagesTable {
 
@@ -30,8 +28,8 @@ public class MessagesTable {
 	}
 
 	public static String addMessageToTable(String message, int userID, int channelID, String color) {
-		return "INSERT INTO Messages (Message, UserID, ChannelID, Color) VALUES "
-				+ "('" + message + "', " + userID + ", " + channelID + ", " + "'" + color + "')";
+		return "INSERT INTO Messages (Message, UserID, ChannelID, Color, Time) VALUES "
+				+ "('" + message + "', " + userID + ", " + channelID + ", " + "'" + color + "', now())";
 	}
 
 	public static String updateColor(String userID, String color) {
@@ -50,7 +48,7 @@ public class MessagesTable {
 	}
 
 	public static String query_MessagesFromChannel(int channelID) {
-		return "SELECT UserName, Message, Color FROM Messages "
+		return "SELECT UserName, Message, Color, TIME_FORMAT(Time, '%H:%i') FROM Messages "
 				+ "JOIN Accounts on Accounts.UserID = Messages.UserID "
 				+ "WHERE ChannelID=" + channelID;
 	}
@@ -98,6 +96,7 @@ public class MessagesTable {
 					default:
 						m.color = Color.BLACK;
 				}
+				m.time = (String) results.getObject(4);
 				messages.add(m);
 			}
 		} catch (SQLException ex) {
