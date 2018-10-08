@@ -149,7 +149,14 @@ public class ChatFrame extends JFrame {
 
 		lblWelcome = new JTextArea("Welcome !\nPlease sign-in and\nchoose a chat channel");
 
-		channelTimer = new Timer(200, channelListener());
+		channelTimer = new Timer(200, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (currentChannel != 0) {
+					messagesUpdate();
+				}
+			}
+		});
 		channelTimer.start();
 
 	}
@@ -161,8 +168,8 @@ public class ChatFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color[] myColors = {Color.BLUE, Color.PINK, Color.GREEN, Color.MAGENTA,
-					Color.RED, Color.ORANGE, Color.CYAN, Color.BLACK};
-				String[] colorNames = {"blue", "pink", "green", "magenta", "red", "orange", "cyan", "black"};
+					Color.RED, new Color(110, 0, 170), Color.CYAN, Color.BLACK};
+				String[] colorNames = {"blue", "pink", "green", "magenta", "red", "purple", "cyan", "black"};
 				preferredColorName = colorNames[i];
 				btnTextColor.setForeground(myColors[i]);
 				i = (i + 1) % 8;
@@ -202,14 +209,6 @@ public class ChatFrame extends JFrame {
 	}
 
 	/**
-	 * Returns this instance of the chat frame.
-	 * @return
-	 */
-	public ChatFrame getChatFrame() {
-		return this;
-	}
-
-	/**
 	 * Returns the sign in panel.
 	 * @return
 	 */
@@ -234,13 +233,8 @@ public class ChatFrame extends JFrame {
 	}
 
 	/**
-	 * Returns the channelName JLabel.
-	 * @return
+	 * Updates the messages Panel and Users Panel to have up to date information
 	 */
-	public JLabel getLblChannelName() {
-		return lblChannelName;
-	}
-
 	private void messagesUpdate() {
 		//See if we should autoscroll after this update
 		messagesScroller.validate();
@@ -272,16 +266,7 @@ public class ChatFrame extends JFrame {
 			messagesScroller.getVerticalScrollBar().setValue(messagesScroller.getVerticalScrollBar().getMaximum());
 		}
 		contentPane.validate();
-	}
-
-	private ActionListener channelListener() {
-		return new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				if (currentChannel != 0) {
-					messagesUpdate();
-				}
-			}
-		};
+		mySignInPanel.validate();
+		contentPane.repaint();
 	}
 }

@@ -96,9 +96,6 @@ public class MessagesTable {
 					case "green":
 						m.color = Color.GREEN;
 						break;
-					case "yellow":
-						m.color = Color.YELLOW;
-						break;
 					case "red":
 						m.color = Color.RED;
 						break;
@@ -113,6 +110,9 @@ public class MessagesTable {
 						break;
 					case "magenta":
 						m.color = Color.MAGENTA;
+						break;
+					case "purple":
+						m.color = new Color(110, 0, 170);
 						break;
 					default:
 						m.color = Color.BLACK;
