@@ -1,12 +1,9 @@
 package database;
 
-/******************************************
- * CSIS2410: Advanced Programming
- * Assignment 02: Database Application
- * Authors: Joshua DeMoss & Daniel Longman
- * Date: 10/07/2018
- ******************************************/
-
+/**
+ * ****************************************
+ * CSIS2410: Advanced Programming Assignment 02: Database Application Authors: Joshua DeMoss & Daniel Longman Date: 10/07/2018 ****************************************
+ */
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -37,6 +34,7 @@ import javax.swing.JScrollBar;
 
 /**
  * This JFrame contains all of the chat application appearance and interaction.
+ *
  * @author Joshua DeMoss & Daniel Longman
  *
  */
@@ -47,6 +45,7 @@ public class ChatFrame extends JFrame {
 	private List<JButton> channelButtons = new ArrayList<>();
 	private int currentChannel;
 	private int userID;
+	private String currentUserName;
 	Timer generalTimer;
 	Timer gamingTimer;
 	Timer inspirationalTimer;
@@ -165,6 +164,7 @@ public class ChatFrame extends JFrame {
 		btnTextColor.setPreferredSize(new Dimension(130, 20));
 		btnTextColor.addActionListener(new ActionListener() {
 			int i = 0;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color[] myColors = {Color.BLUE, Color.PINK, Color.GREEN, Color.MAGENTA,
@@ -209,30 +209,6 @@ public class ChatFrame extends JFrame {
 	}
 
 	/**
-	 * Returns the sign in panel.
-	 * @return
-	 */
-	public SignInPanel getSignInPanel() {
-		return this.mySignInPanel;
-	}
-
-	/**
-	 * Returns the welcome message as a JTextArea.
-	 * @return
-	 */
-	public JTextArea getLblWelcome() {
-		return this.lblWelcome;
-	}
-
-	/**
-	 * Sets the user ID to the specified value.
-	 * @param ID
-	 */
-	public void setUserID(int ID) {
-		this.userID = ID;
-	}
-
-	/**
 	 * Updates the messages Panel and Users Panel to have up to date information
 	 */
 	private void messagesUpdate() {
@@ -243,12 +219,15 @@ public class ChatFrame extends JFrame {
 
 		List<Message> messages = MessagesTable.getMessagesFromChannel(currentChannel);
 		mySignInPanel.removeAll();
-		String currentUser;
 		for (int i = 0; i < messages.size(); i++) { // appends the correct username based on their ID, followed by their message.
-			currentUser = messages.get(i).user;
-			JLabel newMessage = new JLabel(messages.get(i).time + " " + currentUser + ": " + messages.get(i).messageText);
-			newMessage.setBackground(Color.WHITE);
-			newMessage.setForeground(messages.get(i).color);
+			JLabel newMessage = new JLabel(messages.get(i).time + " " + messages.get(i).user + ": " + messages.get(i).messageText);
+			if (messages.get(i).messageText.contains(currentUserName)) {
+				newMessage.setBackground(Color.RED);
+				newMessage.setForeground(Color.BLACK);
+				newMessage.setOpaque(true);
+			} else {
+				newMessage.setForeground(messages.get(i).color);
+			}
 			mySignInPanel.add(newMessage);
 		}
 		// adding each user-name as a JLabel
@@ -268,5 +247,34 @@ public class ChatFrame extends JFrame {
 		contentPane.validate();
 		mySignInPanel.validate();
 		contentPane.repaint();
+	}
+
+	/**
+	 * Returns the sign in panel.
+	 *
+	 * @return
+	 */
+	public SignInPanel getSignInPanel() {
+		return this.mySignInPanel;
+	}
+
+	/**
+	 * Returns the welcome message as a JTextArea.
+	 *
+	 * @return
+	 */
+	public JTextArea getLblWelcome() {
+		return this.lblWelcome;
+	}
+
+	/**
+	 * Sets the user ID to the specified value.
+	 *
+	 * @param ID
+	 * @param userName
+	 */
+	public void setUser(int ID, String userName) {
+		this.userID = ID;
+		currentUserName = userName;
 	}
 }

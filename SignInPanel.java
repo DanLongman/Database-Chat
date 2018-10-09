@@ -106,7 +106,7 @@ public class SignInPanel extends JPanel {
 						ex.printStackTrace();
 					}
 					userID = (AccountsTable.executeQueryReturnUserID(userName));
-					myChatFrame.setUserID(userID);
+					myChatFrame.setUser(userID, userName);
 					myChatFrame.getSignInPanel().removeAll();
 					myChatFrame.getSignInPanel().add(myChatFrame.getLblWelcome());
 					myChatFrame.getLblWelcome().setText("Welcome " + userName + "!\nPlease choose a channel to chat in...");
@@ -117,7 +117,7 @@ public class SignInPanel extends JPanel {
 				} // this is reached if passwords match
 				else {
 					userID = (AccountsTable.executeQueryReturnUserID(userName));
-					myChatFrame.setUserID(userID);
+					myChatFrame.setUser(userID, userName);
 					myChatFrame.getSignInPanel().removeAll();
 					myChatFrame.getSignInPanel().add(myChatFrame.getLblWelcome());
 					myChatFrame.getLblWelcome().setText("Welcome back " + userName + "!\nPlease choose a channel to chat in...");
