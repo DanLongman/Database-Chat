@@ -77,7 +77,7 @@ public class MessagesTable {
 	public static List<Message> getMessagesFromChannel(int channelID) {
 		List<Message> messages = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(query_MessagesFromChannel(channelID));
 
@@ -135,7 +135,7 @@ public class MessagesTable {
 	public static List<String> executeQueryReturnMessagesFromChannel(int channelID) {
 		List<String> messages = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(query_MessagesFromChannel(channelID));
 

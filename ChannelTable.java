@@ -55,7 +55,7 @@ public class ChannelTable {
 	 */
 	public static int numOfChannels() {
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(query_numOfChannels());
 			while (results.next()) {
@@ -76,7 +76,7 @@ public class ChannelTable {
 	 */
 	public static String getChannelName(int channelID) {
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(query_Name(channelID));
 			while (results.next()) {

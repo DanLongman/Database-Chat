@@ -118,7 +118,7 @@ public class AccountsTable {
 	 */
 	public static void updateOnlineTime(int userID) {
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			statement.execute(AccountsTable.query_updateUserTime(userID));
 		} catch (SQLException ex) {
@@ -135,7 +135,7 @@ public class AccountsTable {
 	 */
 	public static int executeQueryReturnUserID(String username) {
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(AccountsTable.query_UserID(username));
 			while (results.next()) {
@@ -154,7 +154,7 @@ public class AccountsTable {
 	public static List<String> getOnlineUsers() {
 		List<String> onlineUsers = new ArrayList<>();
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(AccountsTable.query_OnlineUsers());
 			while (results.next()) {
@@ -175,7 +175,7 @@ public class AccountsTable {
 	 */
 	public static int executeQueryReturnPassword(String username) {
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(query_PasswordByUser(username));
 			while (results.next()) {
@@ -196,7 +196,7 @@ public class AccountsTable {
 	 */
 	public static String executeQueryReturnUsername(String sqlQuery) {
 		try (Connection connection = DriverManager.getConnection(
-				"jdbc:mysql://24.11.122.199:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
+				"jdbc:mysql://73.228.84.50:3306/Chat?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", "root", "Lon^gm4n");
 				Statement statement = connection.createStatement()) {
 			ResultSet results = statement.executeQuery(sqlQuery);
 			while (results.next()) {
